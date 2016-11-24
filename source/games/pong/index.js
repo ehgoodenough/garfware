@@ -66,94 +66,90 @@ var ware = new Ware(5000)
 
 // Kickoff the game loop!
 var loop = new Afloop(function(delta) {
-    
+
     // If the game is over,
     // stop everything.
     if(ware.hasEnded) {
         return
     }
-    
-    // Normalize the delta
-    delta = Math.min(delta, 100)
-    delta = delta / (1000 / 60)
-    
+
     //////////////////////
     // The Good Paddle //
     ////////////////////
-    
+
     // When the player presses up arrow
     // key, we move the paddle upwards.
     if(Keyb.isDown("<up>")) {
         good_paddle.position.y -= good_paddle.speed * delta
     }
-    
+
     // When the player presses the down arrow
     // key, we move the paddle downwards.
     if(Keyb.isDown("<down>")) {
         good_paddle.position.y += good_paddle.speed * delta
     }
-    
+
     /////////////////////
     // The Bad Paddle //
     ///////////////////
-    
+
     // If the paddle is above the
     // ball, move the paddle upwards.
     if(bad_paddle.position.y > ball.position.y) {
         bad_paddle.position.y -= bad_paddle.speed * delta
     }
-    
+
     // If the paddle is below the
     // ball, move the paddle downwards.
     if(bad_paddle.position.y < ball.position.y) {
         bad_paddle.position.y += bad_paddle.speed * delta
     }
-    
+
     ///////////////
     // The Ball //
     /////////////
-    
+
     // Give the ball a spin!
     // It doesn't actually affect
     // anything; it just looks cool.
     ball.rotation += 0.2 * delta
-    
+
     ball.position.x += ball.velocity.x * delta
     ball.position.y += ball.velocity.y * delta
-    
+
     // If the ball is moving upwards and hit
     // the top of the screen, bounce the ball.
     if(ball.velocity.y < 0 && ball.position.y < 0) {
         ball.velocity.y *= -1
     }
-    
+
     // If the ball is moving downwards and hit
     // the bottom of the screen, bounce the ball.
     if(ball.velocity.y > 0 && ball.position.y > Pixi.renderer.view.height) {
         ball.velocity.y *= -1
     }
-    
+
     // If the ball is moving leftwards and hit the good paddle, bounce the ball.
     if(ball.velocity.x < 0 && good_paddle.containsPoint(ball.position)) {
         ball.velocity.x *= -1
     }
-    
+
     // If the ball is moving rightwards and hit the bad paddle, bounce the ball.
     if(ball.velocity.x > 0 && bad_paddle.containsPoint(ball.position)) {
         ball.velocity.x *= -1
     }
-    
-    
+
+
     // If the ball leaves the screen, the player
     // has failed to bounce it, and has lost.
     if(ball.position.x < 0) {
         ware.fail()
     }
-    
+
     ////////////////
     // Rendering //
     //////////////
-    
+
     // Render the game.
     Pixi.render(stage)
 })

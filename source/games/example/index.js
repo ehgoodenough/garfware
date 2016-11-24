@@ -1,10 +1,10 @@
 // Because we imported them in our HTML, we
 // now have access to these three tools:
-// 
+//
 // -> Pixi: For drawing to the canvas!!
 // -> Keyb: For getting input from the keyboard!!
 // -> Afloop: For looping your code!!
-// 
+//
 // Below is an example of how to use these. :]
 
 // This is our "container", which contains
@@ -30,7 +30,7 @@ var monkey = new Pixi.Sprite(textures.monkey)
 stage.addChild(monkey)
 
 var loop = new Afloop(function(delta) {
-    
+
     // We can check if a key is being pressed
     // using Keyb. If a player is pressing the
     // H key, we'll log "Hello World!!" to
@@ -38,7 +38,7 @@ var loop = new Afloop(function(delta) {
     if(Keyb.isDown("H")) {
         console.log("Hello World!!")
     }
-    
+
     // We can use this to move our monkey.
     // If the player is pressing the up arrow key...
     if(Keyb.isDown("<up>")) {
@@ -47,7 +47,7 @@ var loop = new Afloop(function(delta) {
         // have this nifty position object.
         monkey.position.y -= 1
     }
-    
+
     // Let's do that for all directions.
     if(Keyb.isDown("<down>")) {
         monkey.position.y += 1
@@ -58,16 +58,16 @@ var loop = new Afloop(function(delta) {
     if(Keyb.isDown("<right>")) {
         monkey.position.x += 1
     }
-    
+
     // Oh, and drop a banana if
     // you hitting the spacebar.
     if(Keyb.isJustDown("<space>")) {
         // Create a new sprite for the banana..
         var banana = new Pixi.Sprite(textures.banana)
-        
+
         // Position the banana on top of the monkey.
         banana.position.copy(monkey.position)
-        
+
         // Add the banana to our "stage".
         stage.addChild(banana)
     }
