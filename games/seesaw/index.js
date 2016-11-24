@@ -50,6 +50,8 @@ leftGarf.anchor.x=0.5
 leftGarf.anchor.y=1.0
 leftGarf.position.x= Lx
 leftGarf.position.y=-9
+leftGarf.scale.x*=Lw
+leftGarf.scale.y*=Lw
 
  // Right Garf
 var Rx = Math.random()*220
@@ -66,6 +68,8 @@ rghtGarf.anchor.y=1.0
 rghtGarf.position.x= Rx
 rghtGarf.position.y=-9
 rghtGarf.scale.x=-1
+rghtGarf.scale.x*=Rw
+rghtGarf.scale.y*=Rw
 
 // Make the fulcrum sprite
 var fulcrum = new Pixi.Sprite(textures.fulcrum)
@@ -85,14 +89,14 @@ stage.addChild(fulcrum)
 // Create a new microgame.
 var microgame = new Microgame({
     title: "Seesaw",
-    duration: 5000,
+    duration: 50000,
     onTimeout:function(){
       microgame.fail()
     }
 })
 
 var omega = 0
-var Mome = 90000
+var Mome = Rw*Rx*Rx + Lw*Lx*Lx
 
 var loop = new Afloop(function(delta) {
 
@@ -118,9 +122,11 @@ var loop = new Afloop(function(delta) {
     seesaw.anchor.x = (220+Fx)/440
     leftGarf.position.x = Lx - Fx
     rghtGarf.position.x = Rx - Fx
+    Mome = Rw*(Rx - Fx)*(Rx - Fx) + Lw*(Lx - Fx)*(Lx - Fx)
 
     // Generate torques for rotation
     moment = Lw*(Fx-Lx) - Rw*(Rx-Fx)
+    moment += -60*seesaw.rotation// add fudge spring around pivot point
     omega += moment / Mome
     seesaw.rotation += omega
     if(seesaw.rotation > Math.PI/6){
@@ -132,8 +138,10 @@ var loop = new Afloop(function(delta) {
       omega = 0
     }
 
-    // Check for win
-    if(Fx > winX-5 && Fx < winX+5 ){
+    // Check for winx
+    console.log(omega)
+    if(Fx > winX-5 && Fx < winX+5){
+    //if( Math.abs(seesaw.rotation) < Math.PI/15 && Math.abs(omega)<0.01  ){
       microgame.pass()
     }
 
