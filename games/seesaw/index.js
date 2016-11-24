@@ -34,6 +34,7 @@ seesaw.anchor.x = 0.5
 seesaw.anchor.y = 0.5
 seesaw.position.x=320
 seesaw.position.y=400
+seesaw.rotation = Math.PI/6
 
 // Add the Garfs on top of it
  // Left Garf
@@ -49,7 +50,7 @@ seesaw.addChild(leftGarf)
 leftGarf.anchor.x=0.5
 leftGarf.anchor.y=1.0
 leftGarf.position.x= Lx
-leftGarf.position.y=-9
+leftGarf.position.y=-5
 leftGarf.scale.x*=Lw
 leftGarf.scale.y*=Lw
 
@@ -66,7 +67,7 @@ seesaw.addChild(rghtGarf)
 rghtGarf.anchor.x=0.5
 rghtGarf.anchor.y=1.0
 rghtGarf.position.x= Rx
-rghtGarf.position.y=-9
+rghtGarf.position.y=-5
 rghtGarf.scale.x=-1
 rghtGarf.scale.x*=Rw
 rghtGarf.scale.y*=Rw
@@ -89,9 +90,33 @@ stage.addChild(fulcrum)
 // Create a new microgame.
 var microgame = new Microgame({
     title: "Seesaw",
-    duration: 50000,
+    duration: 5000,
     onTimeout:function(){
-      microgame.fail()
+      console.log("Time UP!!")
+      if(Fx > winX-5 && Fx < winX+5){
+        console.log("Grace Period")
+        while( Math.abs(seesaw.rotation) < Math.PI/15 && Math.abs(omega)<0.01  ){
+          // Generate torques for rotation
+          moment = Lw*(Fx-Lx) - Rw*(Rx-Fx)
+          moment += -60*seesaw.rotation// add fudge spring around pivot point
+          moment += -150*omega
+          omega += moment / Mome
+          seesaw.rotation += omega
+          if(seesaw.rotation > Math.PI/6){
+            seesaw.rotation = Math.PI/6
+            omega = 0
+          }
+          if(seesaw.rotation < -Math.PI/6){
+            seesaw.rotation = -Math.PI/6
+            omega = 0
+          }
+          Pixi.render(stage)
+        }
+        microgame.pass()
+      }
+      else{
+        microgame.fail()
+      }
     }
 })
 
@@ -127,6 +152,7 @@ var loop = new Afloop(function(delta) {
     // Generate torques for rotation
     moment = Lw*(Fx-Lx) - Rw*(Rx-Fx)
     moment += -60*seesaw.rotation// add fudge spring around pivot point
+    moment += -150*omega
     omega += moment / Mome
     seesaw.rotation += omega
     if(seesaw.rotation > Math.PI/6){
@@ -139,9 +165,8 @@ var loop = new Afloop(function(delta) {
     }
 
     // Check for winx
-    console.log(omega)
-    if(Fx > winX-5 && Fx < winX+5){
-    //if( Math.abs(seesaw.rotation) < Math.PI/15 && Math.abs(omega)<0.01  ){
+    //if(Fx > winX-5 && Fx < winX+5){
+    if( Math.abs(seesaw.rotation) < Math.PI/15 && Math.abs(omega)<0.01  ){
       microgame.pass()
     }
 
