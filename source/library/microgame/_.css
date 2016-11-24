@@ -1,0 +1,100 @@
+#microgame > .state {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    position: absolute;
+
+    transition-property: width height;
+    transition-duration: 0.25s;
+    transition-delay: 0.5s;
+}
+
+#microgame > .state.active {
+    width: 1em;
+    height: 1em;
+}
+
+#microgame > .state:not(.active) {
+    width: 0em;
+    height: 0em;
+}
+
+#microgame > section {
+    width: 100%;
+    height: 0.5em;
+    position: absolute;
+
+    opacity: 0.9;
+}
+
+#microgame > section.header {
+    top: 0px;
+}
+
+#microgame > section.footer {
+    bottom: 0px;
+}
+
+#microgame > section > .points {
+    float: right;
+    padding: 0.1em 0.1em;
+    line-height: 1em;
+
+    color: #FFF;
+    font-size: 0.55em;
+    font-family: pixel;
+}
+
+#microgame > section > .heart {
+    width: 1em;
+    height: 1em;
+    float: right;
+    font-size: 0.5em;
+
+    background-size: 1em 1em;
+    background-repeat: repeat-x;
+    background-position: right;
+
+    transition-property: width;
+    transition-duration: 0.5s;
+    transition-delay: 1s;
+}
+
+#microgame > section > #has.heart {
+    background-image: url("/library/microgame/images/has-heart.png");
+}
+
+#microgame > section > #hasnt.heart {
+    background-image: url("/library/microgame/images/hasnt-heart.png");
+}
+
+#microgame > section > .timer {
+    width: 4em;
+    height: 1em;
+    float: left;
+    font-size: 0.5em;
+
+    background-size: 4em 1em;
+    background-repeat: no-repeat;
+    background-image: url("/library/microgame/images/timer.png");
+
+    // transition-property: width;
+    // transition-duration: 0.25s;
+}
+
+#microgame > section > .subtitle {
+    float: right;
+    padding: 0.5em;
+    line-height: 1em;
+
+    color: #FFF;
+    font-size: 0.25em;
+    font-family: pixel;
+}
+
+@font-face {
+    font-family: pixel;
+    src: url("/library/microgame/fonts/pixel.ttf") format("truetype");
+}

@@ -61,15 +61,18 @@ stage.addChild(good_paddle)
 stage.addChild(bad_paddle)
 stage.addChild(ball)
 
-// Create a new microgame, or a "ware".
-var ware = new Ware(5000)
+// Create a new microgame.
+var microgame = new Microgame({
+    title: "Pong",
+    duration: 5000,
+})
 
 // Kickoff the game loop!
 var loop = new Afloop(function(delta) {
 
     // If the game is over,
     // stop everything.
-    if(ware.hasEnded) {
+    if(microgame.hasEnded) {
         return
     }
 
@@ -143,7 +146,7 @@ var loop = new Afloop(function(delta) {
     // If the ball leaves the screen, the player
     // has failed to bounce it, and has lost.
     if(ball.position.x < 0) {
-        ware.fail()
+        microgame.fail()
     }
 
     ////////////////
