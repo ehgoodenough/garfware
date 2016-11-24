@@ -63,11 +63,11 @@
 }
 
 #microgame > section > #has.heart {
-    background-image: url("/library/microgame/images/has-heart.png");
+    background-image: url("./../../library/microgame/images/has-heart.png");
 }
 
 #microgame > section > #hasnt.heart {
-    background-image: url("/library/microgame/images/hasnt-heart.png");
+    background-image: url("./../../library/microgame/images/hasnt-heart.png");
 }
 
 #microgame > section > .timer {
@@ -78,7 +78,7 @@
 
     background-size: 4em 1em;
     background-repeat: no-repeat;
-    background-image: url("/library/microgame/images/timer.png");
+    background-image: url("./../../library/microgame/images/timer.png");
 
     // transition-property: width;
     // transition-duration: 0.25s;
@@ -96,5 +96,5 @@
 
 @font-face {
     font-family: pixel;
-    src: url("/library/microgame/fonts/pixel.ttf") format("truetype");
+    src: url("./../../library/microgame/fonts/pixel.ttf") format("truetype");
 }
