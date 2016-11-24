@@ -20,7 +20,7 @@ function Microgame(options) {
     document.body.appendChild(this.mount)
 
     var request = new XMLHttpRequest();
-    request.open("GET", "./../../library/microgame/@.html", true);
+    request.open("GET", "./../../library/microgame/index.html", true);
     request.onload = function() {
         if(request.status < 200 || request.status > 400) {
             throw new Error("Something happened trying to get the microgame markup.")
