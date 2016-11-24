@@ -1,0 +1,40 @@
+/*
+    canvas.css
+    
+    Resizes your canvas to always
+    fit in the frame! How handy!!
+    
+    Example GIF: http://i.imgur.com/6nZ6uPf.gif
+    
+    PS: It assumes your canvas has an aspect ratio
+    of 4x3, like 640x480 or 320x240. Sorry about that.
+*/
+
+canvas,
+#frame {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+    position: fixed;
+    overflow: hidden;
+    image-rendering: pixelated;
+}
+
+
+@media(min-aspect-ratio: 4/3) {
+    canvas,
+    #frame {
+        width: 133.333vh !important;
+        height: 100vh !important;
+    }
+}
+
+@media(max-aspect-ratio: 4/3) {
+    canvas,
+    #frame {
+        width: 100vw !important;
+        height: 75vw !important;
+    }
+}
