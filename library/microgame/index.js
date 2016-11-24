@@ -1,8 +1,8 @@
 function Microgame(options) {
     options = options || {}
 
-    this.title = options.title || undefined
     this.duration = options.duration || 5000
+    this.subtitle = options.subtitle || options.title || undefined
     this.onTimeout = options.onTimeout || function() {
         this.pass()
     }.bind(this)
@@ -30,6 +30,7 @@ function Microgame(options) {
             this.mount.querySelector(".points").textContent = this.points
             this.mount.querySelector("#has.heart").style.width = this.hearts + "em"
             this.mount.querySelector("#hasnt.heart").style.width = (3 - this.hearts) + "em"
+            this.mount.querySelector(".subtitle").textContent = this.subtitle
 
             this.loop = new Afloop(function(delta) {
                 delta = delta * (1000 / 60)
