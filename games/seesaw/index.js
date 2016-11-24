@@ -106,16 +106,18 @@ var loop = new Afloop(function(delta) {
 
     // Fulcrum Movement
     if(Keyb.isDown("<left>")) {
-        fulcrum.position.x -= 1
+        //fulcrum.position.x -= 1
         Fx -= 1
     }
     if(Keyb.isDown("<right>")) {
-        fulcrum.position.x += 1
+        //fulcrum.position.x += 1
         Fx += 1
     }
     if(Fx < -220){Fx=-220}
     if(Fx > 220) {Fx=220}
-    //seesaw.anchor.x = (220+Fx)/440
+    seesaw.anchor.x = (220+Fx)/440
+    leftGarf.position.x = Lx - Fx
+    rghtGarf.position.x = Rx - Fx
 
     // Generate torques for rotation
     moment = Lw*(Fx-Lx) - Rw*(Rx-Fx)
