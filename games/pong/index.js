@@ -63,7 +63,7 @@ stage.addChild(ball)
 
 // Create a new microgame.
 var microgame = new Microgame({
-    title: "Pong",
+    subtitle: "Pong",
     duration: 5000,
 })
 

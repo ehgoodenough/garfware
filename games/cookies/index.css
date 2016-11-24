@@ -1,0 +1,12 @@
+/*
+    Nothing much here!! Not sure if you want to faff around
+    with CSS at all, but if you do, this is where you do it.
+*/
+
+body {
+    background-color: #222;
+}
+
+canvas {
+    background-color: #111;
+}
