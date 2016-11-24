@@ -18,7 +18,7 @@
 13. when you type `git push origin gh-pages`,
 14. it'll ask you for the username and password of your github account
 15. did it work? did you get any errors?
-16. if not, your code is commited! everyone can download and play it!! woohoo!
+16. if not, your code is committed! everyone can download and play it!! woohoo!
 17. give high fives.
 
 ## how to get the newest code that others have pushed ##
