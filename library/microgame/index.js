@@ -57,8 +57,10 @@ Microgame.prototype.onLoop = function(delta) {
                 this.onTimeout()
             }
         } else {
-            var percentage = Math.max(this.duration - this.time, 0) / this.duration
-            this.mount.querySelector(".timer").style.width = (4 * percentage) + "em"
+            if(!!this.mount) {
+                var percentage = Math.max(this.duration - this.time, 0) / this.duration
+                this.mount.querySelector(".timer").style.width = (4 * percentage) + "em"
+            }
         }
     }
 }
@@ -74,16 +76,20 @@ Microgame.prototype.onEnd = function(state) {
         if(state == "pass") {
             this.points += 1
 
-            this.mount.querySelector("#pass.state").classList.add("active")
-            this.mount.querySelector(".points").textContent = this.points
+            if(!!this.mount) {
+                this.mount.querySelector("#pass.state").classList.add("active")
+                this.mount.querySelector(".points").textContent = this.points
+            }
         }
 
         if(state == "fail") {
             this.hearts -= 1
 
-            this.mount.querySelector("#fail.state").classList.add("active")
-            this.mount.querySelector("#has.heart").style.width = this.hearts + "em"
-            this.mount.querySelector("#hasnt.heart").style.width = (3 - this.hearts) + "em"
+            if(!!this.mount) {
+                this.mount.querySelector("#fail.state").classList.add("active")
+                this.mount.querySelector("#has.heart").style.width = this.hearts + "em"
+                this.mount.querySelector("#hasnt.heart").style.width = (3 - this.hearts) + "em"
+            }
 
 
             if(this.hearts == 0) {
@@ -93,7 +99,7 @@ Microgame.prototype.onEnd = function(state) {
         }
 
         this._schedule(function() {
-            window.location = window.location.pathname + "?h=" + this.hearts + "&s=" + this.points
+            window.location = window.location.pathname + "?h=" + this.hearts + "&p=" + this.points
         }, 2000)
     }
 }
